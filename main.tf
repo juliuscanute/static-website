@@ -9,7 +9,7 @@ module storage {
 }
 
 module certificate {
-  source = "git@github.com:juliuscanute/static-website-modules.git//certificate?ref=0.0.5"
+  source = "git@github.com:juliuscanute/static-website-modules.git//certificate?ref=0.0.7"
   domain_name = "${var.domain_name}"
   alternative_names = "${var.alternative_names}"
   zone_id = "${module.dns.zone_id}"
@@ -24,7 +24,7 @@ module dns {
 
 module cdn {
   source = "git@github.com:juliuscanute/static-website-modules.git//cdn?ref=0.0.1"
-  domain_name = "${var.domain_name}"
+  domain_name = "${module.storage.bucket_domain_name}"
   valid_aliases = "${var.alternative_names}"
   certificate_arn = "${module.certificate.certificate_arn}"
 }
@@ -33,15 +33,15 @@ module codebuild {
   source = "git@github.com:juliuscanute/static-website-modules.git//codebuild?ref=0.0.6"
   project_name = "my-personal-hugo-website"
   project_description = "Personal website created in Hugo"
-  iam_role_arn = "aws-hugo-code-build"
-  build_repository_name = "hugo-builder"
+  iam_role_arn = "${module.access_control.codebuild_iam_role_arn}"
+  build_repository_name = "${var.build_repository_name}"
 }
 
 module access_control {
-  source = "git@github.com:juliuscanute/static-website-modules.git//access_control?ref=0.0.3"
+  source = "git@github.com:juliuscanute/static-website-modules.git//access_control?ref=0.0.9"
   s3_bucket_arn = "${module.storage.bucket_arn}"
   s3_bucket_id = "${module.storage.bucket_id}"
   origin_iam_arn = "${module.cdn.origin_iam_arn}"
   codebuild_role_name = "hugo-builder-role"
-  repository_policy_name = "hugo-image-access-policy"
+  repository_policy_name = "${module.codebuild.build_image_name}"
 }
