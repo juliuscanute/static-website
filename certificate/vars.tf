@@ -5,16 +5,16 @@ variable "aws_region" {
 
 variable "domain_name" {
   description = "Name of the domain"
-  default = "alghdscvb.com"
+  default = "simplyteach.tk"
 }
 
 variable "alternative_names" {
   description = "Alternative names for this domain"
-  default = ["alghdscvb.com","www.alghdscvb.com"]
+  default = ["simplyteach.tk","www.simplyteach.tk"]
   type = "list"
 }
 
-variable build_repository_name {
-  type = "string"
-  default = "hugo-builder"
+variable "existing" {
+  description = "Is the hosted zone avaialbe already?"
+  default = true
 }
