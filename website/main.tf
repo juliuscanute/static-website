@@ -1,6 +1,6 @@
 terraform {
   backend "local" {
-    path = "state/website.tfstate"
+    path = "state/website/website.tfstate"
   }
 }
 
@@ -11,7 +11,7 @@ provider "aws" {
 data "terraform_remote_state" "certificate" {
   backend = "local"
   config = {
-    path = "state/certificate.tfstate"
+    path = "state/certificate/certificate.tfstate"
   }
 }
 
