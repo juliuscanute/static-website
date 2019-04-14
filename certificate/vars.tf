@@ -1,5 +1,5 @@
 variable "aws_region" {
-  description = "The region to which the bucket belongs"
+  description = "The region in which certificate should be created"
   default = "us-east-1"
 }
 
@@ -16,5 +16,5 @@ variable "alternative_names" {
 
 variable "existing" {
   description = "Is the hosted zone avaialbe already?"
-  default = true
+  default = false
 }

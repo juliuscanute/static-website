@@ -18,6 +18,6 @@ module certificate {
 module dns {
   source = "git@github.com:juliuscanute/static-website-modules.git//dns?ref=0.2.6"
   domain_name = "${var.domain_name}"
-  existing = false
+  existing = "${var.existing}"
   create_record = false
 }
