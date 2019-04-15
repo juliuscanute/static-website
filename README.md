@@ -1,7 +1,7 @@
 HLD
 ===
 
-![Drag Racing](doc/hld.png)
+![High Level Design](doc/hld.png)
 
 Certificate
 ===========
